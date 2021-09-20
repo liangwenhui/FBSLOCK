@@ -12,12 +12,12 @@ import java.util.List;
  *
  */
 @Slf4j
-class RedisLockCmd {
+public class RedisLockCmd {
 
 
     private JedisPool jedisPool;
-
-    private int timeout = 60;
+    //秒
+    private int timeout = 500;
 
 
     private SetParams setParams = SetParams.setParams().nx().ex(timeout);
@@ -51,7 +51,7 @@ class RedisLockCmd {
      * @param lockId
      * @return
      */
-    String createRedisKeyApi(String lockId){
+    public String createRedisKeyApi(String lockId){
         Jedis jedis = null;
         try {
             jedis = jedisPool.getResource();
@@ -68,7 +68,7 @@ class RedisLockCmd {
      * @param lockId
      * @return
      */
-    String createRedisKeyLua(String lockId){
+    private String createRedisKeyLua(String lockId){
         Jedis jedis = null;
         try {
             jedis = jedisPool.getResource();
